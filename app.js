@@ -53,9 +53,14 @@ app.use(notFound)
 
 app.use(errorhandler);
 
+let PORT = 5000;
+if (process.env.PORT) {
+  PORT = process.env.PORT
+}
+
 db.connectToDatabase()
   .then(function () {
-    app.listen(3000);
+    app.listen(PORT);
     console.log('connected');
   })
   .catch(function (error) {
