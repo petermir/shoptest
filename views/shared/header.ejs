@@ -1,0 +1,70 @@
+<header>
+  <nav id="nav">
+    <div class="nav-center">
+      <div class="nav-header">
+        <!-- <img src="./logo.svg" class="logo" alt="logo" /> -->
+        <a href="#home" class="scroll-link" id="home">NanaShop</a>
+        <button class="nav-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      <div class="links-container">
+        <ul class="links">
+          <% if (locals.isAuth) { %>
+          <li>
+            <form action="/logout" method="POST">
+              <input
+                type="hidden"
+                name="_csrf"
+                value="<%= locals.csrfToken %>"
+              />
+              <button>Logout</button>
+            </form>
+          </li>
+          <% } %>
+
+          <% if (!locals.isAuth) { %> 
+            <li><a href="/signup">Sign in</a></li>
+          <% } %>   
+          
+          <% if(locals.isAdmin && !locals.isAdmin) { %>
+          <li>
+            <a href="/orders"></a>
+          </li>
+          <% } %> <% if(locals.isAdmin) { %>
+          <li><a href="/admin/products">Manage Products</a></li>
+          <li><a href="/admin/orders">Manage Orders</a></li>
+          <% } %> <% if(!locals.isAdmin) { %>
+          <li>
+            <a href="/cart"><i class="fa-regular fa-star"></i>
+              
+            <span class="badge"></span></a>
+          </li>
+          <% } %>
+
+          <li>
+            <a href="#about" class="scroll-link">about</a>
+          </li>
+          <li>
+            <a href="#services" class="scroll-link">services</a>
+          </li>
+          <li>
+            <a href="#tours" class="scroll-link">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <% if(!locals.isAdmin || !locals.isAuth) { %>
+  <div class="banner">
+    <div class="container">
+      <h1>WELCOME</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas eos neque
+        sunt in? Id, necessitatibus quos quisquam distinctio laudantium fugiat?
+      </p>
+      <a href="#tours" class="scroll-link btn btn-white">Explore</a>
+    </div>
+  </div>
+  <% } %>
+</header>
